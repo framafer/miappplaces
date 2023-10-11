@@ -23,9 +23,9 @@ import { provideFirestore, getFirestore } from '@angular/fire/firestore';
     BrowserModule,
     ReactiveFormsModule,
     
-    AgmCoreModule.forRoot({
+    /* AgmCoreModule.forRoot({
       apiKey: 'AIzaSyB4daZ4zC06G2xg74JaHebAkawkv95AumY'
-    }),
+    }), */
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideFirestore(() => getFirestore())
   ],
