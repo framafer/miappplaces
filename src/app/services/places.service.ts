@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Firestore, collection, addDoc, collectionData, doc, deleteDoc } from '@angular/fire/firestore';
+import { Firestore, collection, addDoc, collectionData, doc, deleteDoc, updateDoc } from '@angular/fire/firestore';
 import Place from '../interfaces/place';
 import { Observable } from 'rxjs';
 
@@ -26,4 +26,25 @@ export class PlacesService {
     return deleteDoc(placeDocRef);
   }
 
+  updatePlace(place: Place, placeActualizado:Place){
+
+    const placeDocRef = doc(this.firestore, `places/${place.id}`);
+    updateDoc(placeDocRef, 
+      { name: placeActualizado.name,
+        latitude: placeActualizado.latitude,
+        longitude: placeActualizado.longitude,
+        description: placeActualizado.description,
+        image: placeActualizado.image
+      }
+    )  
+    /* return updateDoc(placeDocRef, 
+      
+      ); */
+  }
+
+
+  /* const cityRef = db.collection('cities').doc('DC');
+
+// Set the 'capital' field of the city
+const res = await cityRef.update({capital: true}); */
 }

@@ -35,4 +35,8 @@ export class PlaceListComponent implements OnInit {
     console.log(response);
   }
 
+  onClickModificar(place: Place){
+
+  }
+
 }

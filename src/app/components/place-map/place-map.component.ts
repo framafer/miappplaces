@@ -4,6 +4,7 @@ import { PlacesService } from 'src/app/services/places.service';
 import { Loader } from "@googlemaps/js-api-loader";
 
 
+
 @Component({
   selector: 'app-place-map',
   templateUrl: './place-map.component.html',

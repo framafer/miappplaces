@@ -11,21 +11,23 @@ import { AgmCoreModule } from '@agm/core';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
 import { provideFirestore, getFirestore } from '@angular/fire/firestore';
+import { ModPlaceComponent } from './components/mod-place/mod-place.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NewPlaceComponent,
     PlaceListComponent,
-    PlaceMapComponent
+    PlaceMapComponent,
+    ModPlaceComponent
   ],
   imports: [
     BrowserModule,
     ReactiveFormsModule,
     
-    /* AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyB4daZ4zC06G2xg74JaHebAkawkv95AumY'
-    }), */
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyBCdmIvuKFOI8nAlQIbx7TiCegFiVLy3E8'
+    }),
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideFirestore(() => getFirestore())
   ],
