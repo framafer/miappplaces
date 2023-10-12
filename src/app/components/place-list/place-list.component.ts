@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 //import Place from 'src/app/interfaces/place.interface';
 import Place from "src/app/interfaces/place";
 import { PlacesService } from 'src/app/services/places.service';
@@ -11,6 +11,9 @@ import { PlacesService } from 'src/app/services/places.service';
 export class PlaceListComponent implements OnInit {
 
   places: Place[];
+
+  @Output() eventoModificarPlace = new EventEmitter<Place>();
+
 
   constructor(
     private placesService: PlacesService
@@ -36,7 +39,7 @@ export class PlaceListComponent implements OnInit {
   }
 
   onClickModificar(place: Place){
-
+    this.eventoModificarPlace.emit(place);
   }
 
 }
