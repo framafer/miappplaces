@@ -48,7 +48,7 @@ export class PlaceMapComponent implements OnInit {
       
       
 
-      let map: google.maps.Map;
+      /* let map: google.maps.Map;
       async function initMap(): Promise<void> {
       //@ts-ignore
       const { Map } = await loader.importLibrary("maps");
@@ -57,8 +57,8 @@ export class PlaceMapComponent implements OnInit {
       zoom: 8,
       });
       }
-
-      initMap();
+ */
+      //initMap();
 
     })
   }

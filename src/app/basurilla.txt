@@ -4,7 +4,22 @@
 my APIKEY   en Google Maps:  AIzaSyBCdmIvuKFOI8nAlQIbx7TiCegFiVLy3E8
 
 
+Para incorporar bootstrap a Angular: 
 
+    - npm install bootstrap jquery @popperjs/core   (Si da problemas de compatibilidad, usar el npm install XXXXX -- force o el npm install --save --legacy-peer-deps )
+    - Con los paquetes ya instalados en el node_modules nos vamos al angular.json para añadirlos: 
+
+            "styles":[
+                "node_modules/bootstrap/dist/css/bootstrap.min.css",
+                "src/styles.css"
+            ],
+            "scripts":[
+                "node_modules/jquery/dist/jquery.min.js",
+                "node_modules/@popperjs/core/dist/umd/popper.min.js",
+                "node_modules/bootstrap/dist/js/bootstrap.min.js"
+            ]
+
+    Y ya podemos usar bootstrap en nuestro proyecto. Para copiar los componentes, nos vamos a la página oficial de bootstrap 
 
 
  <script>(g=>{var h,a,k,p="The Google Maps JavaScript API",c="google",l="importLibrary",q="__ib__",m=document,b=window;b=b[c]||(b[c]={});

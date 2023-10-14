@@ -11,3 +11,9 @@ main {
 .map {
     grid-column: 1/2;
 }
+
+.header{
+    display:flex;
+    justify-content: center;
+    
+}
