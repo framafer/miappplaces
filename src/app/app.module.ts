@@ -16,6 +16,7 @@ import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { ModPlaceComponent } from './components/mod-place/mod-place.component';
 import { InicioComponent } from './components/inicio/inicio.component';
 import { AppRoutingModule } from './app-routing.module';
+import { RegistroComponent } from './components/registro/registro.component';
 //import { Router, RouterModule } from '@angular/router';
 
 @NgModule({
@@ -26,6 +27,7 @@ import { AppRoutingModule } from './app-routing.module';
     PlaceMapComponent,
     ModPlaceComponent,
     InicioComponent,
+    RegistroComponent,
   ],
   imports: [
     BrowserModule,

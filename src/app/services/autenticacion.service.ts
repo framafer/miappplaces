@@ -15,8 +15,8 @@ export class AutenticacionService {
 
 
   usuarioAutenticado:boolean = false;
-  //   
-  //credencialesUsuario: 
+  usuarioARegistrarse: boolean = false;
+  //usuarioALogearse: boolean = true;
 
   constructor() {
     const firebaseConfig = {
@@ -34,14 +34,38 @@ export class AutenticacionService {
   }
 
 
-  registroUsuario(userdata: any) {
+  registroUsuarioUsCon(userdata: any) {
     const auth = getAuth();
     createUserWithEmailAndPassword(auth, userdata.email, userdata.password)
       .then((userCredential) => {
+        this.usuarioAutenticado = true;
         // Signed in 
         const user = userCredential.user;
         console.log(user);
         // ...
+      })
+      .catch((error) => {
+        this.usuarioAutenticado = false;
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorCode, errorMessage);
+      });
+  }
+
+
+  registroUsuarioGoogle() {
+    const auth = getAuth();
+    const provider = new GoogleAuthProvider();
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        this.usuarioAutenticado = true;
+        // Signed in 
+        const credential = GoogleAuthProvider.credentialFromResult(result);
+        if(credential){
+          this.usuarioAutenticado = true;
+          console.log("El usuarioAutenticado vale:", this.usuarioAutenticado);
+
+        }
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -96,15 +120,21 @@ export class AutenticacionService {
   }
 
   // ESto inicia sesión con una cuenta email y contraseña
-  /* inicioSesion(userdata: { email: any; password: any; }) {
+  inicioSesionUsCon(userdata: { email: any; password: any; }) {
     const auth = getAuth();
     signInWithEmailAndPassword(auth, userdata.email, userdata.password)
-      .then(response => {
-        console.log(response);
-        this.router.navigate(['/']);
+      .then(result => {
+        const credential = GoogleAuthProvider.credentialFromResult(result);
+        console.log(result);
+        if(credential){
+          this.usuarioAutenticado = true;
+          console.log("El usuarioAutenticado vale:", this.usuarioAutenticado);
+
+        }
       })
       .catch(
         error => {
+          this.usuarioAutenticado = false;
           const errorCode = error.code;
           const errorMessage = error.message;
           // ..
@@ -112,7 +142,7 @@ export class AutenticacionService {
           console.log(errorCode, errorMessage);
         }
       )
-  } */
+  }
 
   isAuthenticated() {
     const auth = getAuth();

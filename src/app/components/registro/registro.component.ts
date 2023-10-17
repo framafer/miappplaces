@@ -6,14 +6,12 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AutenticacionService } from 'src/app/services/autenticacion.service';
 
 
-
 @Component({
-  selector: 'app-inicio',
-  templateUrl: './inicio.component.html',
-  styleUrls: ['./inicio.component.css']
+  selector: 'app-registro',
+  templateUrl: './registro.component.html',
+  styleUrls: ['./registro.component.css']
 })
-export class InicioComponent {
-
+export class RegistroComponent {
   loginConUsConForm: any;
   loginConGoogleForm: any;
   userdata: any;
@@ -25,7 +23,7 @@ export class InicioComponent {
  
 
   @Output() eventoUsuarioLogeado = new EventEmitter();
-  @Output() eventoARegistrarse = new EventEmitter();
+  @Output() eventoALogearse = new EventEmitter();
 
   constructor(private formBuilder: FormBuilder,
     private autService: AutenticacionService,
@@ -58,7 +56,7 @@ export class InicioComponent {
     //this.autenticando = true;
     //this.userdata = this.saveUserdata();
     const usuario = this.saveUserdata();
-    this.autService.inicioSesionUsCon(usuario);
+    this.autService.registroUsuarioUsCon(usuario);
 
     /* if(this.autService.usuarioAutenticado){
       this.autenticado = true;
@@ -86,7 +84,7 @@ export class InicioComponent {
   onSubmitConGoogle() {
     //this.autenticando = true;
     //this.userdata = this.saveUserdata();
-    this.autService.inicioSesionGoogle();
+    this.autService.registroUsuarioGoogle();
 
     /* if(this.autService.usuarioAutenticado){
       this.autenticado = true;
@@ -122,11 +120,11 @@ export class InicioComponent {
     return this.autService.isAuthenticated();
   }
 
-  ARegistrarse(){
-    this.eventoARegistrarse.emit();
+  ALogearse(){
+    this.eventoALogearse.emit();
   }
 
 
+
+
 }
-
-

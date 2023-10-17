@@ -1,22 +1,37 @@
-
-<ng-container *ngIf="Logeado; else templateALogearse">
-  <h2 class="header">Bienvenido a este maravillosa aplicación  {{NombreUsuario}}</h2>
+<ng-container *ngIf="Logeado; else templateALogearseORegistrarse">
+  <h2 class="header">Bienvenido a esta maravillosa aplicación {{NombreUsuario}}</h2>
   <main>
-    <section class="form" *ngIf = "Modificando">
-      <app-mod-place  [placeAModificar] = "PlaceAModificar" (eventoModificadoPlace) = "ModificadoPlace()"></app-mod-place>
+    <section class="form" *ngIf="Modificando">
+      <app-mod-place [placeAModificar]="PlaceAModificar" (eventoModificadoPlace)="ModificadoPlace()"></app-mod-place>
     </section>
-    <section class="form" *ngIf = "!Modificando">
+    <section class="form" *ngIf="!Modificando">
       <app-new-place></app-new-place>
+      <p></p>
+      <button type="button" class="btn btn-info" (click)="salir()">Salir</button>
     </section>
     <section class="list">
-      <app-place-list (eventoModificarPlace) = "modificarPlace($event)"></app-place-list>
+      <app-place-list (eventoModificarPlace)="modificarPlace($event)"></app-place-list>
+      
     </section>
     <section class="map">
       <app-place-map></app-place-map>
     </section>
+       
   </main>
+
+  
 </ng-container>
 
-<ng-template #templateALogearse>
-  <app-inicio (eventoUsuarioLogeado) = "usuarioLogeado()"></app-inicio>
+<ng-template #templateALogearseORegistrarse>
+
+  <ng-container *ngIf="!ARegistrarse; else templateARegistrarse">
+    <app-inicio (eventoUsuarioLogeado)="usuarioLogeado()" (eventoARegistrarse)="aRegistrarse()"></app-inicio>
+  </ng-container>
+
+  <ng-template #templateARegistrarse>
+    <ng-container>
+      <app-registro (eventoUsuarioLogeado)="usuarioLogeado()" (eventoALogearse)="aLogearse()"></app-registro>
+    </ng-container>
+  </ng-template>
+
 </ng-template>
