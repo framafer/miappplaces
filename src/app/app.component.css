@@ -17,3 +17,9 @@ main {
     justify-content: center;
     
 }
+
+.nombreusuario{
+    grid-column: 1/2;
+    font-size: smaller;
+    text-align:right;
+}
