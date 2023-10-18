@@ -1,5 +1,7 @@
 <ng-container *ngIf="Logeado; else templateALogearseORegistrarse">
-  <h2 class="header">Bienvenido a esta maravillosa aplicación {{NombreUsuario}}</h2>
+  <h2 class="header">Bienvenido a esta maravillosa aplicación</h2>
+  
+
   <main>
     <section class="form" *ngIf="Modificando">
       <app-mod-place [placeAModificar]="PlaceAModificar" (eventoModificadoPlace)="ModificadoPlace()"></app-mod-place>
@@ -10,6 +12,7 @@
       <button type="button" class="btn btn-info" (click)="salir()">Salir</button>
     </section>
     <section class="list">
+      <p>{{this.NombreUsuario}}<p>
       <app-place-list (eventoModificarPlace)="modificarPlace($event)"></app-place-list>
       
     </section>

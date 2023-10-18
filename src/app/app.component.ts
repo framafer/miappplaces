@@ -16,8 +16,12 @@ export class AppComponent {
   NombreUsuario: string = "";
 
   constructor(private autService: AutenticacionService){
+    
+    
+  }
 
-    //this.NombreUsuario = autService.credencialesUsuario.user.DisplayName;
+  ngOnInit() {
+    
   }
 
   modificarPlace(place: Place){
@@ -34,6 +38,7 @@ export class AppComponent {
     console.log("Estoy en el app.component.ts y el valor de Logeado antes de ejecutar el método es ", this.Logeado);
     this.Logeado = true;
     console.log("Estoy en el app.component.ts y el valor de Logeado después de ejecutar el método es ", this.Logeado);
+    this.NombreUsuario = this.autService.usuario;
   }
 
   aRegistrarse(){

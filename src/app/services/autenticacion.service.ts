@@ -6,7 +6,7 @@ import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 
 //import * as firebase from 'firebase/app';
 //import { FirebaseAuth } from 'angularfire2';
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, UserCredential } from "firebase/auth";
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +16,10 @@ export class AutenticacionService {
 
   usuarioAutenticado:boolean = false;
   usuarioARegistrarse: boolean = false;
-  //usuarioALogearse: boolean = true;
+  
+  NombreUsuario: string = "";
+  userCredential!: UserCredential;
+  usuario!: any;  
 
   constructor() {
     const firebaseConfig = {
@@ -31,6 +34,7 @@ export class AutenticacionService {
     // Initialize Firebase
     const app = initializeApp(firebaseConfig);
     
+    
   }
 
 
@@ -39,9 +43,11 @@ export class AutenticacionService {
     createUserWithEmailAndPassword(auth, userdata.email, userdata.password)
       .then((userCredential) => {
         this.usuarioAutenticado = true;
-        // Signed in 
-        const user = userCredential.user;
-        console.log(user);
+        // Signed in
+        
+        const user = userCredential.user.email;
+        this.usuario = user;
+        console.log("El usuario es: ", user);
         // ...
       })
       .catch((error) => {
@@ -63,7 +69,13 @@ export class AutenticacionService {
         const credential = GoogleAuthProvider.credentialFromResult(result);
         if(credential){
           this.usuarioAutenticado = true;
+
           console.log("El usuarioAutenticado vale:", this.usuarioAutenticado);
+          console.log("El credentialFromResult(result) vale:", credential);
+
+          const usuario = result.user.email;
+          console.log("Este es el usuario: ", usuario);
+          this.usuario = usuario;
 
         }
       })
@@ -89,15 +101,19 @@ export class AutenticacionService {
         const credential = GoogleAuthProvider.credentialFromResult(result);
         //this.credencialesUsuario = credential?.toJSON;
         const token = credential.accessToken;
-        //const usuario = credential.user;
-
+        
         console.log("Este es el token: ", token);
         //console.log("Este es el credential: ", this.credencialesUsuario);
-        //console.log("Este es el usuario: ", usuario);
-
+        
         if(credential){
           this.usuarioAutenticado = true;
           console.log("El usuarioAutenticado vale:", this.usuarioAutenticado);
+
+          const usuario = result.user.email;
+          console.log("Este es el usuario: ", usuario);
+          this.usuario = usuario;
+
+
 
         }
         
@@ -126,9 +142,13 @@ export class AutenticacionService {
       .then(result => {
         const credential = GoogleAuthProvider.credentialFromResult(result);
         console.log(result);
-        if(credential){
+        if(result){
           this.usuarioAutenticado = true;
-          console.log("El usuarioAutenticado vale:", this.usuarioAutenticado);
+          const usuario = result.user.email;
+          console.log("Este es el usuario: ", usuario);
+          this.usuario = usuario;
+
+          //console.log("El usuarioAutenticado vale:", this.usuarioAutenticado);
 
         }
       })
